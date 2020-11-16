@@ -1,0 +1,221 @@
+#: import utils kivy.utils
+ScreenManager: 
+    MyHomeScreen:
+        id:home
+        name:'home'
+
+<MyHomeScreen>:
+    #background setup
+    canvas:
+        Color:
+            rgb: (0,0,0)
+        Rectangle:
+            size: self.size
+            pos: self.pos       
+    FloatLayout:
+
+        #Title
+        MDToolbar:
+            title: "BMI Calculator"
+            pos_hint:{'top':1}
+        #Labels
+        Label:
+            pos_hint:{"top":540/600}
+            size_hint:(50/150,None)
+            text: 'Gender'
+            font_size: 15
+
+        Label:
+            pos_hint:{"top":380/600}
+            size_hint:(50/150,None)
+            text: 'Weight'
+            font_size: 15
+
+        Label:
+            pos_hint:{"top":300/600}
+            size_hint:(50/150,None)
+            text: 'Height'
+            font_size: 15
+
+        Label:
+            pos_hint:{"top":220/600}
+            size_hint:(40/150,None)
+            text: 'Age'
+            font_size: 15
+
+        #Buttons
+        BoxLayout:
+            orientation: 'horizontal'
+            
+            padding:30,0
+            spacing: 20
+            pos_hint:{"top":480/600}
+            size_hint:(1,None)
+        
+            MDFillRoundFlatButton:
+                id: male
+                height: 100
+                width:135
+                md_bg_color: (59/255,59/255,59/255,1)
+            MDRoundFlatButton:
+                id: female
+                height: 100
+                width:135
+                md_bg_color: (59/255,59/255,59/255,1)
+        
+        Image:
+            pos_hint:{"top":480/600}
+            size_hint:(.558,None)
+            source: 'images/male.png'
+
+        Label:
+            pos_hint:{"top":440/600}
+            size_hint:(.558,None)
+            text: 'male'
+            font_size: 15
+
+        Image:
+            pos_hint:{"top":480/600}
+            size_hint:(1.45,None)
+            source: 'images/female.png'
+            specific_text_color: 1,0,1,1
+
+        Label:
+            pos_hint:{"top":440/600}
+            size_hint:(1.45,None)
+            text: 'female'
+            font_size: 15
+
+        MDFillRoundFlatButton:
+            text:'Calculate'
+            pos_hint:{"top":80/600,'center_x':.5}
+            size_hint: (290/350,None)
+            padding: (30,0)
+            on_release: root.calculate_bmi()
+        #Cards
+        BoxLayout:
+            padding:30,0
+            spacing:15
+            orientation: 'horizontal'
+            pos_hint:{"top":1.45}
+            #weight
+            CoolRoundCard:
+                md_bg_color: (0,0,0,0)
+                size_hint:(None,None)
+                size: '175dp','50dp'
+                
+                MDIconButton:
+                    icon:'plus'
+                    on_release:
+                        root.weight_increase()
+
+                Label:
+                    text: str(root.weight)
+                    font_size:35
+                    color: 0,0,0,1
+
+                MDIconButton:
+                    icon: 'minus'
+                    on_release:
+                        root.weight_decrease()
+                    
+                    
+
+            CoolRoundCard:
+                md_bg_color: (0,0,0,0)
+                size_hint:(None,None)
+                size: '100dp','50dp'
+                MDLabel:
+                    # padding: 5
+                    text: 'kg'
+                    font_size:25
+                    color: 0,0,0,1
+
+        BoxLayout:
+            padding:30,0
+            spacing:15
+            orientation: 'horizontal'
+            pos_hint:{"top":1.315}
+        #height 
+            CoolRoundCard:
+                md_bg_color: (0,0,0,0)
+                size_hint:(None,None)
+                size: '175dp','50dp'
+                MDIconButton:
+                    icon:'plus'
+                    on_release:
+                        root.user_height_increase()
+
+                Label:
+                    text: str(root.user_height)
+                    font_size:35
+                    color: 0,0,0,1
+                
+                MDIconButton:
+                    icon: 'minus'
+                    pos_hint: {'center_x': 0}
+                    on_release:
+                        root.user_height_decrease()
+                
+            CoolRoundCard:
+                md_bg_color: (0,0,0,0)
+                size_hint:(None,None)
+                size: '100dp','50dp'
+                MDLabel:
+                    text: 'cm'
+                    font_size:35
+            
+        # Years
+        CoolRoundCard:
+            padding:30,0
+            pos_hint:{"top":158/600,'center_x':.5}
+            size_hint:(None,None)
+            size: '290dp','50dp'
+            md_bg_color: (0,0,0,0)
+
+            
+            MDIconButton:
+                icon:'plus'
+                on_release:
+                    root.age_increase()
+            
+            Label:
+                text: str(root.age)
+                font_size:35
+                color: 0,0,0,1
+            
+            MDIconButton:
+                icon: 'minus'
+                on_release:
+                    root.age_decrease()
+
+        
+        
+
+        
+
+
+<CoolRoundButton@Button>:
+    background_normal: ''
+    background_color: (1,0,1,0)
+    border_radius:[18]
+    bg_color:(0,0,1,1)
+    canvas.after:
+        Color:
+            rgba: self.bg_color
+        RoundedRectangle:
+            size:self.size
+            pos:self.pos
+            radius: self.border_radius
+
+<CoolRoundCard@MDCard>:
+    md_bg_color: (0,0,0,0)
+    bd_radius:[5]
+    bag_color: (1,1,1,1)
+    canvas:
+        Color:
+            rgba: self.bag_color
+        RoundedRectangle:
+            size:self.size
+            pos:self.pos
+            radius: self.bd_radius
