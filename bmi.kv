@@ -3,6 +3,8 @@ ScreenManager:
     MyHomeScreen:
         id:home
         name:'home'
+    ResultScreen:
+        name: 'result'
 
 <MyHomeScreen>:
     #background setup
@@ -13,11 +15,12 @@ ScreenManager:
             size: self.size
             pos: self.pos       
     FloatLayout:
-
         #Title
         MDToolbar:
             title: "BMI Calculator"
             pos_hint:{'top':1}
+            md_bg_color: 0,0,0,1
+            left_action_items: [['menu',lambda x: x]]
         #Labels
         Label:
             pos_hint:{"top":540/600}
@@ -63,6 +66,12 @@ ScreenManager:
                 width:135
                 md_bg_color: (59/255,59/255,59/255,1)
         
+        CheckBtn:
+            active: True
+            pos_hint:{"top":480/600,'center_x':.4}
+        CheckBtn:
+            pos_hint:{"top":480/600,'center_x':.85}
+        
         Image:
             pos_hint:{"top":480/600}
             size_hint:(.558,None)
@@ -86,12 +95,16 @@ ScreenManager:
             text: 'female'
             font_size: 15
 
+
+
         MDFillRoundFlatButton:
             text:'Calculate'
             pos_hint:{"top":80/600,'center_x':.5}
             size_hint: (290/350,None)
             padding: (30,0)
-            on_release: root.calculate_bmi()
+            on_press: 
+                app.sm.transition.direction = 'up'
+                app.change_screen('result')
         #Cards
         BoxLayout:
             padding:30,0
@@ -125,11 +138,12 @@ ScreenManager:
                 md_bg_color: (0,0,0,0)
                 size_hint:(None,None)
                 size: '100dp','50dp'
-                MDLabel:
-                    # padding: 5
-                    text: 'kg'
-                    font_size:25
-                    color: 0,0,0,1
+                
+                MDDropDownItem:
+                    id: drop_item
+                    text: 'KG'
+                    on_release: root.dropdown.open()
+
 
         BoxLayout:
             padding:30,0
@@ -208,6 +222,23 @@ ScreenManager:
             pos:self.pos
             radius: self.border_radius
 
+<ResultScreen>:
+    FloatLayout:
+    #background setup
+        canvas:
+            Color:
+                rgb: (0,0,0)
+            Rectangle:
+                size: self.size
+                pos: self.pos  
+        MDToolbar:
+            pos_hint: {'top':1}
+            title: 'Result'
+            md_bg_color: (0,0,0,1)
+            # anchor_title: 'center'
+            
+            left_action_items: [['arrow-left',lambda x: app.change_screen('home')]]
+
 <CoolRoundCard@MDCard>:
     md_bg_color: (0,0,0,0)
     bd_radius:[5]
@@ -219,3 +250,8 @@ ScreenManager:
             size:self.size
             pos:self.pos
             radius: self.bd_radius
+
+<CheckBtn@MDCheckbox>:
+    group: 'group'
+    size_hint: None,None
+    size: '48dp','48dp'
