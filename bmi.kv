@@ -20,7 +20,7 @@ ScreenManager:
             title: "BMI Calculator"
             pos_hint:{'top':1}
             md_bg_color: 0,0,0,1
-            left_action_items: [['menu',lambda x: x]]
+            # left_action_items: [['menu',lambda x: x]]
         #Labels
         Label:
             pos_hint:{"top":540/600}
@@ -238,6 +238,56 @@ ScreenManager:
             # anchor_title: 'center'
             
             left_action_items: [['arrow-left',lambda x: app.change_screen('home')]]
+        MDLabel:
+            text: 'Result'
+            font_size: 40
+        MDCard:
+            size_hint: None,None
+            size: '290dp','290dp'
+            pos_hint: {'center_x':.5,'center_y':.65}
+            orientation: 'vertical'
+            canvas:
+                Color: 
+                    rgb: (59/255,59/255,59/255,1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                Color: 
+                    rgb: (0,0,1,1)
+                Line:
+                    width: 1.2
+                    bezier:
+                        (self.x+25, self.y+50, self.x + 45, self.y + 55,self.x + 65, self.y + 53, self.x+85, self.y+60)
+                Color: 
+                    rgb: (0,1,0,1)
+                Line:
+                    width: 1.2
+                    bezier:
+                        (self.x+85, self.y+60, self.x + 105, self.y + 65,self.x + 125, self.y + 63, self.x+145, self.y+70)
+                Color: 
+                    rgb: (1,1,0,1)
+                Line:
+                    width: 1.2
+                    bezier:
+                        (self.x+145, self.y+70, self.x + 165, self.y + 75,self.x + 185, self.y + 73, self.x+205, self.y+80)
+                Color: 
+                    rgb: (1,0,0,1)
+                Line:
+                    width: 1.2
+                    bezier:
+                        (self.x+205, self.y+80, self.x + 245, self.y + 85,self.x + 265, self.y + 83, self.x+275, self.y+90)
+            MDLabel:
+                text: 'Your current BMI'
+                font_size: 25
+                color: 1,1,1,1
+                pos_hint: {'center_x':.5,'center_y':.65}
+
+            MDLabel:
+                text: '22.6'
+                font_size: 40
+                bold: True
+                color: 1,1,1,1
+                pos_hint: {'center_x':.5,'center_y':.5}                       
 
 <CoolRoundCard@MDCard>:
     md_bg_color: (0,0,0,0)
