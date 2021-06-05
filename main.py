@@ -1,3 +1,4 @@
+DEBUG=1
 import os
 from kaki.app import App
 from kivymd.app import MDApp
@@ -14,9 +15,10 @@ from bmi import ManagerScreens
 Window.size = (350,600)
 
 
-DEBUG=1
+
  
 class BMICalc(App,MDApp):
+    DEBUG=1
     
     KV_FILES = {
         os.path.join(os.getcwd(),"bmi.kv")
