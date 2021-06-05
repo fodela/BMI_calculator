@@ -77,6 +77,19 @@ ManagerScreens:
                     LayoutTester1:
                         LayoutTester3:
                             size_hint_x:1.66
+                            ButIcon:
+                                icon:'minus'
+                                
+
+                        
+                            MDLabel:
+                                text: '56'
+                                # pos_hint: {'center_x': .5, 'center_y': .5}
+                                halign: 'center'
+
+                            ButIcon:
+                                icon:'plus'
+                                
                         LayoutTester3:
 
 # Height
@@ -89,6 +102,19 @@ ManagerScreens:
                     LayoutTester1:
                         LayoutTester3:
                             size_hint_x:1.66
+                            ButIcon:
+                                icon:'minus'
+                                
+
+                        
+                            MDLabel:
+                                text: '162'
+                                # pos_hint: {'center_x': .5, 'center_y': .5}
+                                halign: 'center'
+
+                            ButIcon:
+                                icon:'plus'
+                                
                         LayoutTester3:
 
 # Age
@@ -99,14 +125,23 @@ ManagerScreens:
                         WhiteLabel:
                             text:'Age'
                     LayoutTester3:
+                        ButIcon:
+                            icon:'minus'
+                            
 
+                        
+                        MDLabel:
+                            text: '24years'
+                            # pos_hint: {'center_x': .5, 'center_y': .5}
+                            halign: 'center'
 
-
-                LayoutTester1:
+                        ButIcon:
+                            icon:'plus'
+                            
+                LayoutTester1:    
                     MDRaisedButton:
                         text:'Calculate'
-                        pos_hint: {'center_x': .5, 'center_y':.5 }
-                        # size_hint_x:1
+                        halign:'center'
                 
     #     #Labels
     #     Label:
@@ -410,19 +445,28 @@ ManagerScreens:
     canvas:
         Color:
             rgba:[0,0,1,1]
-        Rectangle:
+        RoundedRectangle:
             size:self.size
             pos:self.pos
+            radius:[10]
 
 <LayoutTester3@MDBoxLayout>:
     spacing:10
+    padding: 5
     canvas:
         Color:
             rgba:[238/255,238/255,238/255,1]
-        Rectangle:
+        RoundedRectangle:
             size:self.size
             pos:self.pos
-
+            radius:[10]
 <WhiteLabel@MDLabel>:
     theme_text_color:'Custom'
     text_color:1,1,1,1
+
+<ButIcon@MDIconButton>:
+    user_font_size:12
+    theme_text_color:'Custom'
+    text_color:1,1,1,1
+    md_bg_color:0,0,0,1
+    pos_hint: {'center_x': .5, 'center_y': .5}
