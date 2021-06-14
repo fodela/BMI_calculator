@@ -4,6 +4,7 @@
     MyHomeScreen:
         id:home
         name:'home'
+        
     ResultScreen:
         name: 'result'
 
@@ -30,23 +31,17 @@ ManagerScreens:
             orientation: 'vertical'
             padding:30
             spacing:10
-            canvas:
-                Color:
-                    rgb: (1,1,0)
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
             
             
             MDBoxLayout:
                 orientation:'vertical'
                 size_hint_y: .5
-                canvas:
-                    Color:
-                        rgb: (1,0,0)
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
+                # canvas:
+                #     Color:
+                #         rgb: (1,0,0)
+                #     Rectangle:
+                #         size: self.size
+                #         pos: self.pos
                 MDBoxLayout:
                     size_hint_y: .2
                     WhiteLabel:
@@ -61,12 +56,12 @@ ManagerScreens:
             MDBoxLayout:
                 spacing:10
                 orientation: 'vertical'
-                canvas:
-                    Color:
-                        rgb: (0,1,0)
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
+                # canvas:
+                #     Color:
+                #         rgb: (0,1,0)
+                #     Rectangle:
+                #         size: self.size
+                #         pos: self.pos
 # Weight                       
                 LayoutTester1:
                     orientation: 'vertical' 
@@ -79,18 +74,30 @@ ManagerScreens:
                             size_hint_x:1.66
                             ButIcon:
                                 icon:'minus'
+                                on_release:app.weight_decrease()
                                 
 
                         
                             MDLabel:
-                                text: '56'
+                                text: str(app.weight)
                                 # pos_hint: {'center_x': .5, 'center_y': .5}
                                 halign: 'center'
 
                             ButIcon:
                                 icon:'plus'
+                                on_release:app.weight_increase()
                                 
                         LayoutTester3:
+                            MDLabel:
+                                text: app.weight_unit
+                                # pos_hint: {'center_x': .5, 'center_y': .5}
+                                halign: 'center'
+
+                            MDIconButton:
+                                id:but
+                                icon:'chevron-down'
+                                pos_hint: {'center_x': .5, 'center_y': .5}
+                                on_release: app.drop(app.weight_items,self)
 
 # Height
                 LayoutTester1:
@@ -104,18 +111,31 @@ ManagerScreens:
                             size_hint_x:1.66
                             ButIcon:
                                 icon:'minus'
+                                on_release:app.height_decrease()
                                 
 
                         
                             MDLabel:
-                                text: '162'
+                                text: str(app.height)
                                 # pos_hint: {'center_x': .5, 'center_y': .5}
                                 halign: 'center'
 
                             ButIcon:
                                 icon:'plus'
+                                on_press:app.height_increase()
+                                
                                 
                         LayoutTester3:
+                            MDLabel:
+                                text: app.height_unit
+                                # pos_hint: {'center_x': .5, 'center_y': .5}
+                                halign: 'center'
+
+                            MDIconButton:
+                                id:but
+                                icon:'chevron-down'
+                                pos_hint: {'center_x': .5, 'center_y': .5}
+                                on_release: app.drop(app.height_items,self)
 
 # Age
                 LayoutTester1:
@@ -131,7 +151,7 @@ ManagerScreens:
 
                         
                         MDLabel:
-                            text: '24years'
+                            text: str(app.age)
                             # pos_hint: {'center_x': .5, 'center_y': .5}
                             halign: 'center'
 
@@ -142,6 +162,7 @@ ManagerScreens:
                     MDRaisedButton:
                         text:'Calculate'
                         halign:'center'
+                        on_release: print(app.height_unit)
                 
     #     #Labels
     #     Label:
@@ -280,7 +301,7 @@ ManagerScreens:
     #             MDIconButton:
     #                 icon:'plus'
     #                 on_release:
-    #                     root.user_height_increase()
+    #                     root.height_increase()
 
     #             Label:
     #                 text: str(root.user_height)
@@ -433,22 +454,22 @@ ManagerScreens:
 <LayoutTester1@MDBoxLayout>:
     bgcolor:[1,0,1,1]
     spacing:10
-    canvas:
-        Color:
-            rgba:self.bgcolor
-        Rectangle:
-            size:self.size
-            pos:self.pos
+    # canvas:
+    #     Color:
+    #         rgba:self.bgcolor
+    #     Rectangle:
+    #         size:self.size
+    #         pos:self.pos
 
 <LayoutTester2@MDBoxLayout>:
     spacing:10
-    canvas:
-        Color:
-            rgba:[0,0,1,1]
-        RoundedRectangle:
-            size:self.size
-            pos:self.pos
-            radius:[10]
+    # canvas:
+    #     Color:
+    #         rgba:[0,0,1,1]
+    #     RoundedRectangle:
+    #         size:self.size
+    #         pos:self.pos
+    #         radius:[10]
 
 <LayoutTester3@MDBoxLayout>:
     spacing:10
@@ -465,7 +486,7 @@ ManagerScreens:
     text_color:1,1,1,1
 
 <ButIcon@MDIconButton>:
-    user_font_size:12
+    user_font_size:7
     theme_text_color:'Custom'
     text_color:1,1,1,1
     md_bg_color:0,0,0,1
